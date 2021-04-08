@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+      
+  div(class="container-fluid")
+      div(class="row")
+          -
+            let vegetables = [
+              {
+                "department": "student union",
+                "size": "60",
+                "strength": "60"
+              },{
+                "department": "student admin",
+                "size": "40",
+                "strength": "40"
+              },{
+                "department": "dining",
+                "size": "70",
+                "strength": "70"
+              }
+            ]
+          each vegetable in vegetables
+            div(class="col-sm-2") #{vegetable.department}
+            div(class="col-sm-2") #{vegetable.size}
+            div(class="col-sm-2") #{vegetable.strength}
