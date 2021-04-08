@@ -1,9 +1,6 @@
 var express = require('express');
+const office_controlers= require('../controllers/office');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('office', { title: 'Search Results office' });
-});
-
+/* GET office */
+router.get('/', office_controlers.office_view_all_Page);
 module.exports = router;

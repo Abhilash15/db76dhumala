@@ -1,6 +1,6 @@
 var office = require('../models/office');
 // List of all offices
-//exports.office_list = function(req, res) {
+//ex    orts.office_list = function(req, res) {
  //res.send('NOT IMPLEMENTED: office list');
 //};
 exports.office_list = async function(req, res) {
@@ -28,3 +28,15 @@ exports.office_delete = function(req, res) {
 exports.office_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: office update PUT' + req.params.id);
 };
+
+// VIEWS
+// Handle a show all view
+exports.office_view_all_Page = async function(req, res) {
+    try{
+    theoffices = await office.find();
+    res.render('office', { title: 'office Search Results', results: theoffices });
+    }
+    catch(err){
+    res.error(500,`{"error": ${err}}`);
+    }
+    };
