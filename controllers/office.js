@@ -1,8 +1,17 @@
 var office = require('../models/office');
 // List of all offices
-exports.office_list = function(req, res) {
- res.send('NOT IMPLEMENTED: office list');
-};
+//exports.office_list = function(req, res) {
+ //res.send('NOT IMPLEMENTED: office list');
+//};
+exports.office_list = async function(req, res) {
+    try{
+        theoffices = await office.find();
+        res.send(theoffices);
+        }
+        catch(err){
+        res.error(500,`{"error": ${err}}`);
+        }
+    };
 // for a specific office.
 exports.office_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: office detail: ' + req.params.id);
