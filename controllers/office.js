@@ -20,7 +20,7 @@ exports.office_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costumetype":"goat", "cost":12, "size":"large"}
+    // {"officetype":"goat", "cost":12, "size":"large"}
     document.department = req.body.department;
     document.strength = req.body.strength;
     document.size = req.body.size;
@@ -33,9 +33,19 @@ exports.office_create_post = async function(req, res) {
    };
 };
 // Handle office delete form on DELETE.
-exports.office_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: office delete DELETE ' + req.params.id);
+// Handle office delete on DELETE.
+exports.office_delete = async function(req, res) {
+    console.log("delete "  + req.params.id)
+    try {
+        result = await office.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 // Handle office update form on PUT.
 //exports.office_update_put = function(req, res) {
  //res.send('NOT IMPLEMENTED: office update PUT' + req.params.id);
