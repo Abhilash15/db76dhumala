@@ -118,3 +118,31 @@ exports.office_create_Page =  function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// Handle building the view for updating a office.
+// query provides the id
+exports.office_update_Page =  async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await office.findById(req.query.id)
+        res.render('officeupdate', { title: 'office Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle a delete one view with id from query
+exports.office_delete_Page = async function(req, res) {
+    console.log("Delete view for id "  + req.query.id)
+    try{
+        result = await office.findById(req.query.id)
+        res.render('officedelete', { title: 'office Delete', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
