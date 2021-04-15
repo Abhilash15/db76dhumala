@@ -7,4 +7,8 @@ router.get('/', office_controlers.office_view_all_Page);
 /* GET detail office page */
 router.get('/detail', office_controlers.office_view_one_Page);
 
+/* GET create office page */
+router.get('/create', office_controlers.office_create_Page);
+
+
 module.exports = router;
