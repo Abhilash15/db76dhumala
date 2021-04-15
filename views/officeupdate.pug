@@ -3,26 +3,29 @@ extends layout
 block content
   h1= title
 
-  - let officeid = toShow._id
-  - let department = toShow.department
-  - let size = toShow.size
-  - let strength = toShow.strength
+  if (toShow == null)
+    h2 No instance to update
+  else
+    - let officeid = toShow._id
+    - let department = toShow.department
+    - let size = toShow.size
+    - let strength = toShow.strength
   
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{officeid}
-  - let actionid = "/resource/office/" + officeid
-  form(id='officeForm', action= actionid, method="PUT")
-    div.form-group
-        label.officeAttr(for='department') office type
-        input#department(type='text', name='department', value= department )
-    div.form-group
-        label.officeAttr(for='strength') office strength
-        input#strength(type='number', name='strength', value= strength )
-    div.form-group
-        label.officeAttr(for='size') office size
-        input#size(type='number', name='size', value= size )
-    input(type="submit")
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{officeid}
+    - let actionid = "/resource/office/" + officeid
+    form(id='officeForm', action= actionid, method="PUT")
+      div.form-group
+          label.officeAttr(for='department') office type
+          input#department(type='text', name='department', value= department )
+      div.form-group
+          label.officeAttr(for='strength') office strength
+          input#strength(type='number', name='strength', value= strength )
+      div.form-group
+          label.officeAttr(for='size') office size
+          input#size(type='number', name='size', value= size )
+      input(type="submit")
 
   script.
     document.forms['officeForm'].addEventListener('submit', (event) => {

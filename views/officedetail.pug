@@ -3,20 +3,23 @@ extends layout
 block content
   h1= title
 
-  - let officeid = toShow._id
-  - let department = toShow.department
-  - let size = toShow.size
-  - let strength = toShow.strength
-  div
-    div.row
-      div(class='officeAttr mr-3') office ID is:
-      div #{officeid}
-    div.row
-      div(class='officeAttr mr-3') office Type is:
-      div #{department}
-    div.row
-      div(class='officeAttr mr-3') office strength is:
-      div #{strength}
-    div.row
-      div(class='officeAttr mr-3') office size is:
-      div #{size}
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let officeid = toShow._id
+    - let department = toShow.department
+    - let size = toShow.size
+    - let strength = toShow.strength
+    div
+      div.row
+        div(class='officeAttr mr-3') office ID is:
+        div #{officeid}
+      div.row
+        div(class='officeAttr mr-3') office Type is:
+        div #{department}
+      div.row
+        div(class='officeAttr mr-3') office strength is:
+        div #{strength}
+      div.row
+        div(class='officeAttr mr-3') office size is:
+        div #{size}
