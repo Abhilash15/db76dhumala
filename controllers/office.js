@@ -5,13 +5,26 @@ var office = require('../models/office');
 //};
 exports.office_list = async function(req, res) {
     try{
-        theoffices = await office.find();
-        res.send(theoffices);
+        theoffice = await office.find();
+        res.send(theoffice);
         }
         catch(err){
         res.error(500,`{"error": ${err}}`);
         }
     };
+
+   // for a specific office.
+   exports.office_detail = async function(req, res) {
+      console.log("detail"  + req.params.id)
+      try {
+        result = await office.findById( req.params.id)
+        res.send(result)
+     } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+     }
+
+  }; 
 
 // Handle office create on POST.
 exports.office_create_post = async function(req, res) {
@@ -31,20 +44,20 @@ exports.office_create_post = async function(req, res) {
     catch(err){
     res.error(500,`{"error": ${err}}`);
    };
-};
-// Handle office delete form on DELETE.
-// Handle office delete on DELETE.
-exports.office_delete = async function(req, res) {
+   };
+   // Handle office delete form on DELETE.
+   
+   exports.office_delete = async function(req, res) {
     console.log("delete "  + req.params.id)
-    try {
+      try {
         result = await office.findByIdAndDelete( req.params.id)
         console.log("Removed " + result)
         res.send(result)
-    } catch (err) {
+      } catch (err) {
         res.status(500)
         res.send(`{"error": Error deleting ${err}}`);
-    }
-};
+     }
+  };
 
 // Handle office update form on PUT.
 //exports.office_update_put = function(req, res) {
@@ -72,8 +85,8 @@ exports.office_update_put = async function(req, res) {
 // Handle a show all view
 exports.office_view_all_Page = async function(req, res) {
     try{
-    theoffices = await office.find();
-    res.render('office', { title: 'office Search Results', results: theoffices });
+    theoffice = await office.find();
+    res.render('office', { title: 'office Search Results', results: theoffice });
     }
     catch(err){
     res.error(500,`{"error": ${err}}`);

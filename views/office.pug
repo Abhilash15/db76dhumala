@@ -6,8 +6,12 @@ block content
   div(class="container-fluid")
       div(class="row")
           -
-            let vegetables = results
-          each vegetable in vegetables
-            div(class="col-sm-2") #{vegetable.department}
-            div(class="col-sm-2") #{vegetable.size}
-            div(class="col-sm-2") #{vegetable.strength}
+            let office = results
+            each i in office
+                - let destination = `dispatch(\"/office/update?id=${office._id}\")`
+                div(class="row-sm-2" class='m-1') office #{i.department} #{i.department}  is #{i.strength}
+                    button(class="btn-primary ml-1", onclick=destination) Update
+            script.
+                function dispatch(path){
+                    window.location.href = path
+                }
