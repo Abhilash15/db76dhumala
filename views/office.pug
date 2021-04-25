@@ -6,11 +6,17 @@ block content
   div(class="container-fluid")
       div(class="row")
           -
-            let office = results
-            each i in office
-                - let destination = `dispatch(\"/office/update?id=${office._id}\")`
-                div(class="row-sm-2" class='m-1') office #{i.department} #{i.department}  is #{i.strength}
-                    button(class="btn-primary ml-1", onclick=destination) Update
+                let office = results
+            each v in office
+                - let destination = `dispatch(\"/office/update?id=${v._id}\")`
+                - let detail = `dispatch(\"/office/detail?id=${v._id}\")`
+                - let del = `dispatch(\"/office/delete?id=${v._id}\")`
+
+                div(class="row-sm-2" class='m-1') office #{v.department}(#{v.strength}) is #{v.size}
+                    button.btn(class="btn-success ml-1", onclick=detail) Detail
+                    button.btn(class="btn-primary ml-1", onclick=destination) Update
+                    button.btn(class="btn-danger ml-1", onclick=del) Delete
+                
             script.
                 function dispatch(path){
                     window.location.href = path

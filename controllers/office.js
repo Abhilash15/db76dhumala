@@ -42,7 +42,7 @@ exports.office_create_post = async function(req, res) {
     res.send(result);
     }
     catch(err){
-    res.error(500,`{"error": ${err}}`);
+        res.status(500).send("Not a valid Office");
    };
    };
    // Handle office delete form on DELETE.
@@ -84,26 +84,15 @@ exports.office_update_put = async function(req, res) {
 // VIEWS
 // Handle a show all view
 exports.office_view_all_Page = async function(req, res) {
-    try{
-    theoffice = await office.find();
-    res.render('office', { title: 'office Search Results', results: theoffice });
+    try {
+        theoffice = await office.find();
+        res.render('office', { title: 'office Search Results', results: theoffice });
+    } catch (err) {
+        res.error(500, `{"error": ${err}}`);
     }
-    catch(err){
-    res.error(500,`{"error": ${err}}`);
-    }
-    };
+};
 
-    exports.office_detail = async function(req, res) {
-        console.log("detail"  + req.params.id)
-        try {
-            result = await office.findById( req.params.id)
-            res.send(result)
-        } catch (error) {
-            res.status(500)
-            res.send(`{"error": document for id ${req.params.id} not found`);
-        }
-    };
-
+    
     // Handle a show one view with id specified by query
 exports.office_view_one_Page = async function(req, res) {
     console.log("single view for id "  + req.query.id)
