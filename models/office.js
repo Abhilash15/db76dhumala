@@ -1,7 +1,15 @@
 const mongoose = require("mongoose")
 const officeSchema = mongoose.Schema({
-department: String,
-size: Number,
+department:{
+type: String,
+min_length_str :5,
+max_length_str:30
+},
+size: {
+    type:Number,
+    min_value :1,
+    max_value:100
+},
 strength:{
     type: Number,
     min:1,
